@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbapitoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Championship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChampionshipName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Country" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Confederation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfederationName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Confederation" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="ChampionshipID" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="ChampionshipYear" Type="int" Nullable="false" />
+          <Property Name="Link" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ChampionshipID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="Referee" />
+            <PropertyRef Name="HomeTeam" />
+            <PropertyRef Name="AwayTeam" />
+            <PropertyRef Name="MatchDate" />
+          </Key>
+          <Property Name="Referee" Type="int" Nullable="false" />
+          <Property Name="HomeTeam" Type="int" Nullable="false" />
+          <Property Name="AwayTeam" Type="int" Nullable="false" />
+          <Property Name="Result" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="YC_Home" Type="int" Nullable="false" />
+          <Property Name="RC_Home" Type="int" Nullable="false" />
+          <Property Name="YC_Away" Type="int" Nullable="false" />
+          <Property Name="RC_Away" Type="int" Nullable="false" />
+          <Property Name="MatchDate" Type="date" Nullable="false" />
+          <Property Name="Championship" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NextMatch">
+          <Key>
+            <PropertyRef Name="Referee" />
+            <PropertyRef Name="SelectedTeam" />
+            <PropertyRef Name="AgainstTeam" />
+            <PropertyRef Name="FieldControl" />
+            <PropertyRef Name="MatchDate" />
+            <PropertyRef Name="Championship" />
+          </Key>
+          <Property Name="Referee" Type="int" Nullable="false" />
+          <Property Name="SelectedTeam" Type="int" Nullable="false" />
+          <Property Name="AgainstTeam" Type="int" Nullable="false" />
+          <Property Name="FieldControl" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="MatchDate" Type="date" Nullable="false" />
+          <Property Name="Championship" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Referee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefereeName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TeamCompleteName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Champions__Count__4E88ABD4">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Championship" Type="Self.Championship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Championship">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Country__Confede__4BAC3F29">
+          <End Role="Confederation" Type="Self.Confederation" Multiplicity="1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Confederation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="Confederation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Links__Champions__60A75C0F">
+          <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
+          <End Role="Links" Type="Self.Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Championship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="ChampionshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__AwayTea__571DF1D5">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="AwayTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__Champio__5812160E">
+          <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Championship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="Championship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__HomeTea__5629CD9C">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="HomeTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__Referee__5535A963">
+          <End Role="Referee" Type="Self.Referee" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Referee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="Referee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Again__5CD6CB2B">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="AgainstTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Champ__5DCAEF64">
+          <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Championship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="Championship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Refer__5AEE82B9">
+          <End Role="Referee" Type="Self.Referee" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Referee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="Referee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Selec__5BE2A6F2">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="SelectedTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbapitoModelStoreContainer">
+          <EntitySet Name="Championship" EntityType="Self.Championship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Confederation" EntityType="Self.Confederation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NextMatch" EntityType="Self.NextMatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Referee" EntityType="Self.Referee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Champions__Count__4E88ABD4" Association="Self.FK__Champions__Count__4E88ABD4">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Championship" EntitySet="Championship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Country__Confede__4BAC3F29" Association="Self.FK__Country__Confede__4BAC3F29">
+            <End Role="Confederation" EntitySet="Confederation" />
+            <End Role="Country" EntitySet="Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Links__Champions__60A75C0F" Association="Self.FK__Links__Champions__60A75C0F">
+            <End Role="Championship" EntitySet="Championship" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__AwayTea__571DF1D5" Association="Self.FK__Matches__AwayTea__571DF1D5">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__Champio__5812160E" Association="Self.FK__Matches__Champio__5812160E">
+            <End Role="Championship" EntitySet="Championship" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__HomeTea__5629CD9C" Association="Self.FK__Matches__HomeTea__5629CD9C">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__Referee__5535A963" Association="Self.FK__Matches__Referee__5535A963">
+            <End Role="Referee" EntitySet="Referee" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Again__5CD6CB2B" Association="Self.FK__NextMatch__Again__5CD6CB2B">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Champ__5DCAEF64" Association="Self.FK__NextMatch__Champ__5DCAEF64">
+            <End Role="Championship" EntitySet="Championship" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Refer__5AEE82B9" Association="Self.FK__NextMatch__Refer__5AEE82B9">
+            <End Role="Referee" EntitySet="Referee" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Selec__5BE2A6F2" Association="Self.FK__NextMatch__Selec__5BE2A6F2">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbapitoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Championship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChampionshipName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country1" Relationship="Self.FK__Champions__Count__4E88ABD4" FromRole="Championship" ToRole="Country" />
+          <NavigationProperty Name="Links" Relationship="Self.FK__Links__Champions__60A75C0F" FromRole="Championship" ToRole="Links" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK__Matches__Champio__5812160E" FromRole="Championship" ToRole="Matches" />
+          <NavigationProperty Name="NextMatch" Relationship="Self.FK__NextMatch__Champ__5DCAEF64" FromRole="Championship" ToRole="NextMatch" />
+        </EntityType>
+        <EntityType Name="Confederation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfederationName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Country__Confede__4BAC3F29" FromRole="Confederation" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Confederation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Championship" Relationship="Self.FK__Champions__Count__4E88ABD4" FromRole="Country" ToRole="Championship" />
+          <NavigationProperty Name="Confederation1" Relationship="Self.FK__Country__Confede__4BAC3F29" FromRole="Country" ToRole="Confederation" />
+        </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="ChampionshipID" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="ChampionshipYear" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ChampionshipID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Championship" Relationship="Self.FK__Links__Champions__60A75C0F" FromRole="Links" ToRole="Championship" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="Referee" />
+            <PropertyRef Name="HomeTeam" />
+            <PropertyRef Name="AwayTeam" />
+            <PropertyRef Name="MatchDate" />
+          </Key>
+          <Property Name="Referee" Type="Int32" Nullable="false" />
+          <Property Name="HomeTeam" Type="Int32" Nullable="false" />
+          <Property Name="AwayTeam" Type="Int32" Nullable="false" />
+          <Property Name="Result" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="YC_Home" Type="Int32" Nullable="false" />
+          <Property Name="RC_Home" Type="Int32" Nullable="false" />
+          <Property Name="YC_Away" Type="Int32" Nullable="false" />
+          <Property Name="RC_Away" Type="Int32" Nullable="false" />
+          <Property Name="MatchDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Championship" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Championship1" Relationship="Self.FK__Matches__Champio__5812160E" FromRole="Matches" ToRole="Championship" />
+          <NavigationProperty Name="Team" Relationship="Self.FK__Matches__AwayTea__571DF1D5" FromRole="Matches" ToRole="Team" />
+          <NavigationProperty Name="Team1" Relationship="Self.FK__Matches__HomeTea__5629CD9C" FromRole="Matches" ToRole="Team" />
+          <NavigationProperty Name="Referee1" Relationship="Self.FK__Matches__Referee__5535A963" FromRole="Matches" ToRole="Referee" />
+        </EntityType>
+        <EntityType Name="NextMatch">
+          <Key>
+            <PropertyRef Name="Referee" />
+            <PropertyRef Name="SelectedTeam" />
+            <PropertyRef Name="AgainstTeam" />
+            <PropertyRef Name="FieldControl" />
+            <PropertyRef Name="MatchDate" />
+            <PropertyRef Name="Championship" />
+          </Key>
+          <Property Name="Referee" Type="Int32" Nullable="false" />
+          <Property Name="SelectedTeam" Type="Int32" Nullable="false" />
+          <Property Name="AgainstTeam" Type="Int32" Nullable="false" />
+          <Property Name="FieldControl" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MatchDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Championship" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Championship1" Relationship="Self.FK__NextMatch__Champ__5DCAEF64" FromRole="NextMatch" ToRole="Championship" />
+          <NavigationProperty Name="Team" Relationship="Self.FK__NextMatch__Again__5CD6CB2B" FromRole="NextMatch" ToRole="Team" />
+          <NavigationProperty Name="Referee1" Relationship="Self.FK__NextMatch__Refer__5AEE82B9" FromRole="NextMatch" ToRole="Referee" />
+          <NavigationProperty Name="Team1" Relationship="Self.FK__NextMatch__Selec__5BE2A6F2" FromRole="NextMatch" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Referee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefereeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK__Matches__Referee__5535A963" FromRole="Referee" ToRole="Matches" />
+          <NavigationProperty Name="NextMatch" Relationship="Self.FK__NextMatch__Refer__5AEE82B9" FromRole="Referee" ToRole="NextMatch" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK__Matches__AwayTea__571DF1D5" FromRole="Team" ToRole="Matches" />
+          <NavigationProperty Name="Matches1" Relationship="Self.FK__Matches__HomeTea__5629CD9C" FromRole="Team" ToRole="Matches" />
+          <NavigationProperty Name="NextMatch" Relationship="Self.FK__NextMatch__Again__5CD6CB2B" FromRole="Team" ToRole="NextMatch" />
+          <NavigationProperty Name="NextMatch1" Relationship="Self.FK__NextMatch__Selec__5BE2A6F2" FromRole="Team" ToRole="NextMatch" />
+          <Property Name="TeamCompleteName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Champions__Count__4E88ABD4">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Championship" Type="Self.Championship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Championship">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Links__Champions__60A75C0F">
+          <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
+          <End Role="Links" Type="Self.Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Championship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="ChampionshipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__Champio__5812160E">
+          <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Championship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="Championship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Champ__5DCAEF64">
+          <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Championship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="Championship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Country__Confede__4BAC3F29">
+          <End Role="Confederation" Type="Self.Confederation" Multiplicity="1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Confederation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="Confederation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__AwayTea__571DF1D5">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="AwayTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__HomeTea__5629CD9C">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="HomeTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Matches__Referee__5535A963">
+          <End Role="Referee" Type="Self.Referee" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Referee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="Referee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Again__5CD6CB2B">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="AgainstTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Refer__5AEE82B9">
+          <End Role="Referee" Type="Self.Referee" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Referee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="Referee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NextMatch__Selec__5BE2A6F2">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="NextMatch" Type="Self.NextMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NextMatch">
+              <PropertyRef Name="SelectedTeam" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbapitoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Championship" EntityType="Self.Championship" />
+          <EntitySet Name="Confederation" EntityType="Self.Confederation" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Links" EntityType="Self.Links" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" />
+          <EntitySet Name="NextMatch" EntityType="Self.NextMatch" />
+          <EntitySet Name="Referee" EntityType="Self.Referee" />
+          <EntitySet Name="Team" EntityType="Self.Team" />
+          <AssociationSet Name="FK__Champions__Count__4E88ABD4" Association="Self.FK__Champions__Count__4E88ABD4">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Championship" EntitySet="Championship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Links__Champions__60A75C0F" Association="Self.FK__Links__Champions__60A75C0F">
+            <End Role="Championship" EntitySet="Championship" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__Champio__5812160E" Association="Self.FK__Matches__Champio__5812160E">
+            <End Role="Championship" EntitySet="Championship" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Champ__5DCAEF64" Association="Self.FK__NextMatch__Champ__5DCAEF64">
+            <End Role="Championship" EntitySet="Championship" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Country__Confede__4BAC3F29" Association="Self.FK__Country__Confede__4BAC3F29">
+            <End Role="Confederation" EntitySet="Confederation" />
+            <End Role="Country" EntitySet="Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__AwayTea__571DF1D5" Association="Self.FK__Matches__AwayTea__571DF1D5">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__HomeTea__5629CD9C" Association="Self.FK__Matches__HomeTea__5629CD9C">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Matches__Referee__5535A963" Association="Self.FK__Matches__Referee__5535A963">
+            <End Role="Referee" EntitySet="Referee" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Again__5CD6CB2B" Association="Self.FK__NextMatch__Again__5CD6CB2B">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Refer__5AEE82B9" Association="Self.FK__NextMatch__Refer__5AEE82B9">
+            <End Role="Referee" EntitySet="Referee" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NextMatch__Selec__5BE2A6F2" Association="Self.FK__NextMatch__Selec__5BE2A6F2">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="NextMatch" EntitySet="NextMatch" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbapitoModelStoreContainer" CdmEntityContainer="dbapitoEntities">
+          <EntitySetMapping Name="Championship">
+            <EntityTypeMapping TypeName="dbapitoModel.Championship">
+              <MappingFragment StoreEntitySet="Championship">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ChampionshipName" ColumnName="ChampionshipName" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Confederation">
+            <EntityTypeMapping TypeName="dbapitoModel.Confederation">
+              <MappingFragment StoreEntitySet="Confederation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ConfederationName" ColumnName="ConfederationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="dbapitoModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Confederation" ColumnName="Confederation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="dbapitoModel.Links">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="ChampionshipYear" ColumnName="ChampionshipYear" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="ChampionshipID" ColumnName="ChampionshipID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="dbapitoModel.Matches">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="Referee" ColumnName="Referee" />
+                <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
+                <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="YC_Home" ColumnName="YC_Home" />
+                <ScalarProperty Name="RC_Home" ColumnName="RC_Home" />
+                <ScalarProperty Name="YC_Away" ColumnName="YC_Away" />
+                <ScalarProperty Name="RC_Away" ColumnName="RC_Away" />
+                <ScalarProperty Name="MatchDate" ColumnName="MatchDate" />
+                <ScalarProperty Name="Championship" ColumnName="Championship" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NextMatch">
+            <EntityTypeMapping TypeName="dbapitoModel.NextMatch">
+              <MappingFragment StoreEntitySet="NextMatch">
+                <ScalarProperty Name="Referee" ColumnName="Referee" />
+                <ScalarProperty Name="SelectedTeam" ColumnName="SelectedTeam" />
+                <ScalarProperty Name="AgainstTeam" ColumnName="AgainstTeam" />
+                <ScalarProperty Name="FieldControl" ColumnName="FieldControl" />
+                <ScalarProperty Name="MatchDate" ColumnName="MatchDate" />
+                <ScalarProperty Name="Championship" ColumnName="Championship" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Referee">
+            <EntityTypeMapping TypeName="dbapitoModel.Referee">
+              <MappingFragment StoreEntitySet="Referee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RefereeName" ColumnName="RefereeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="dbapitoModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="TeamCompleteName" ColumnName="TeamCompleteName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

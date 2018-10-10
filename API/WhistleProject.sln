@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhistleProject_API", "WebApplication3\WhistleProject_API.csproj", "{7C5617E8-E301-4368-B0DC-1F4C85142F9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhistleProject_API.Tests", "WebApplication3.Tests\WhistleProject_API.Tests.csproj", "{CA30D8CF-E862-41AB-BDF4-18EDD8DA3FD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C5617E8-E301-4368-B0DC-1F4C85142F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5617E8-E301-4368-B0DC-1F4C85142F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5617E8-E301-4368-B0DC-1F4C85142F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5617E8-E301-4368-B0DC-1F4C85142F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA30D8CF-E862-41AB-BDF4-18EDD8DA3FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA30D8CF-E862-41AB-BDF4-18EDD8DA3FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA30D8CF-E862-41AB-BDF4-18EDD8DA3FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA30D8CF-E862-41AB-BDF4-18EDD8DA3FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4051CC29-0D8E-4A15-B304-DAC102C9B0FC}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96814ba9f8ff446296efe6ff47067f72" Name="Diagram1">
+        <EntityTypeShape EntityType="dbapitoModel.Championship" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.Confederation" Width="1.5" PointX="0.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.Country" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.Links" Width="1.5" PointX="0.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.Matches" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.NextMatch" Width="1.5" PointX="5.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.Referee" Width="1.5" PointX="7.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbapitoModel.Team" Width="1.5" PointX="9.625" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="dbapitoModel.FK__Champions__Count__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__Links__Champions__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__Matches__Champio__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__NextMatch__Champ__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__Country__Confede__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__Matches__AwayTea__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__Matches__HomeTea__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__Matches__Referee__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__NextMatch__Again__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__NextMatch__Refer__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="dbapitoModel.FK__NextMatch__Selec__5BE2A6F2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
