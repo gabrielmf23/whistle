@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Results;
 using WebApplication3.Models;
 
 namespace WebApplication3.Controllers
@@ -9,15 +11,26 @@ namespace WebApplication3.Controllers
         private dbapitoEntities db = new dbapitoEntities();
 
         // GET: api/Confederations
-        public IQueryable<Confederation> GetConfederation()
+        public IEnumerable<Confederation> GetConfederation()
         {
-            return db.Confederation;
+            return db.Confederation.ToList();
         }
 
         // GET: api/Confederations/id
-        public IQueryable<Confederation> GetConfederationById(int id)
+        public Confederation GetConfederationById(int id)
         {
-            return db.Confederation.Where(c => c.ID == id);
+            Confederation confederation = new Confederation();
+
+            try
+            {
+                confederation = db.Confederation.ToList<Confederation>().Find(c => c.ID == id);
+            }
+            catch
+            {
+                confederation.ID = 0;
+            }
+
+            return confederation;
         }        
 
         #region Auto generated methods

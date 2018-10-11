@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Http;
 using WebApplication3.Models;
@@ -8,11 +9,12 @@ namespace WebApplication3.Controllers
     public class ChampionshipsController : ApiController
     {
         private dbapitoEntities db = new dbapitoEntities();
+        private CountriesController countriesController = new CountriesController();
 
         // GET: api/Championships
-        public IQueryable<Championship> GetChampionship()
+        public IEnumerable<Championship> GetChampionships()
         {
-            return db.Championship;
+            return db.Championship.ToList();
         }
 
         // GET: api/Championships/{id}
@@ -22,7 +24,7 @@ namespace WebApplication3.Controllers
 
             try
             {
-                champ = db.Championship.ToList<Championship>().Find(c => c.ID == id);
+                champ = db.Championship.ToList().Find(c => c.ID == id);
             }
             catch
             {
@@ -33,20 +35,48 @@ namespace WebApplication3.Controllers
         }
 
         // GET: api/Championships/Country?id={id}
-        [ActionName("Country")]
-        public IQueryable<Championship> GetChampionshipByCountry(int countryID)
+        [Route("api/Championships/Country/{id}")]
+        public IEnumerable<Championship> GetChampionshipsByCountry(int id)
         {
             //When a country is selected, it should show all championships related to that country, but also the championships related to the confederation which the country is part of
             //i.e.: Selected Country: England
             //Should return any english championships, and european championships, as Champions/Europa League
-            return db.Championship.Where(c => c.Country == countryID && c.Country == c.Country1.Confederation);
+
+            try
+            {
+               return db.Championship.ToList().FindAll(c => c.Country == id);
+            }
+            catch
+            {
+                return new List<Championship>();
+            }
         }
 
         // GET: api/Championships/Confederation?id={id}
-        [ActionName("Confederation")]
-        public IQueryable<Championship> GetChampionshipByConfederation(int confederationID)
+        [Route("api/Championships/Confederation/{id}")]
+        public IEnumerable<Championship> GetChampionshipsByConfederation(int id)
         {
-            return db.Championship.Where(c => c.Country1.Confederation == confederationID);
+            try
+            {
+                IList<Championship> championships = new List<Championship>();
+                var countries = countriesController.GetCountriesByConfederation(id);
+
+                foreach (Country country in countries)
+                {
+                    foreach (Championship championship in db.Championship.ToList())
+                    {
+                        if (championship.Country == country.ID)
+                        {
+                            championships.Add(championship);
+                        }
+                    }
+                }
+                return championships;
+            }
+            catch
+            {
+                return new List<Championship>();
+            }
         }
 
         #region Auto generated methods

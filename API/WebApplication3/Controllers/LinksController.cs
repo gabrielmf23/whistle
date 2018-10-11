@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using WebApplication3.Models;
 
@@ -9,9 +10,9 @@ namespace WebApplication3.Controllers
         private dbapitoEntities db = new dbapitoEntities();
 
         // GET: api/Links
-        public IQueryable<Links> GetLinks()
+        public IEnumerable<Links> GetLinks()
         {
-            return db.Links;
+            return db.Links.ToList();
         }
 
         #region Auto generated methods

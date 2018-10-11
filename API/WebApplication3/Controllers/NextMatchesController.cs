@@ -15,9 +15,9 @@ namespace WebApplication3.Controllers
         public NextMatchesController() => db = new dbapitoEntities();
 
         // GET: api/NextMatches
-        public IQueryable<NextMatch> GetNextMatches()
+        public IEnumerable<NextMatch> GetNextMatches()
         {
-            return db.NextMatch;
+            return db.NextMatch.ToList();
         }
 
         public virtual List<NextMatch> CreateNextMatches(Matches match)

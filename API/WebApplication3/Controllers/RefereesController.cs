@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using WebApplication3.Models;
 
@@ -13,9 +14,9 @@ namespace WebApplication3.Controllers
         public RefereesController() => db = new dbapitoEntities();
 
         // GET: api/Referees
-        public IQueryable<Referee> GetReferee()
+        public IEnumerable<Referee> GetReferee()
         {
-            return db.Referee;
+            return db.Referee.ToList();
         }
 
         public Referee GetRefereeByID(int id)

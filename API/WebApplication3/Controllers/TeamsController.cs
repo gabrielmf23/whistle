@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using WebApplication3.Models;
 
@@ -13,9 +14,9 @@ namespace WebApplication3.Controllers
         public TeamsController() => db = new dbapitoEntities();
 
         // GET: api/Teams
-        public IQueryable<Team> GetTeam()
+        public IEnumerable<Team> GetTeam()
         {
-            return db.Team;
+            return db.Team.ToList();
         }
 
         public Team GetTeamByID(int id)

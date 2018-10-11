@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Http;
 using WebApplication3.Models;
@@ -10,22 +11,42 @@ namespace WebApplication3.Controllers
         private dbapitoEntities db = new dbapitoEntities();
 
         // GET: api/Countries
-        public IQueryable<Country> GetCountry()
+        public IEnumerable<Country> GetCountries()
         {
-            return db.Country;
+            return db.Country.ToList();
         }
 
         // GET: api/Countries/id
-        public IQueryable<Country> GetCountry(int id)
+        public Country GetCountryById(int id)
         {
-            return db.Country.Where(c => c.ID == id);
+            //return db.Country.Where(c => c.ID == id);
+            Country country = new Country();
+
+            try
+            {
+                country = db.Country.ToList().Find(c => c.ID == id);
+            }
+            catch
+            {
+                country.ID = 0;
+            }
+
+            return country;
         }
 
-        // GET: api/Countries/Confederation?id={id}
-        [ActionName("Confederation")]
-        public IQueryable<Country> GetCountryByConfederation(int confederationID)
+        // GET: api/Countries/Confederation/{id}
+        [Route("api/Countries/Confederation/{id}")]
+        public IEnumerable<Country> GetCountriesByConfederation(int id)
         {
-            return db.Country.Where(c => c.Confederation == confederationID);
+            try
+            {
+                var a = db.Country.ToList().FindAll(c => c.Confederation == id && c.ID != c.Confederation);
+                return a;
+            }
+            catch
+            {
+                return new List<Country>();
+            }
         }
 
         #region Auto generated methods

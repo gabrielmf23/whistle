@@ -18,9 +18,9 @@ namespace WebApplication3.Controllers
         private ChampionshipsController championship = new ChampionshipsController();
 
         // GET: api/Matches
-        public IQueryable<Matches> GetMatches()
+        public IEnumerable<Matches> GetMatches()
         {
-            return db.Matches;
+            return db.Matches.ToList();
         }
 
         // POST: api/Matches
