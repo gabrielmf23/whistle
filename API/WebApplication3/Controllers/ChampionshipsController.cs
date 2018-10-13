@@ -34,7 +34,6 @@ namespace WebApplication3.Controllers
             return champ;
         }
 
-        // GET: api/Championships/Country?id={id}
         [Route("api/Championships/Country/{id}")]
         public IEnumerable<Championship> GetChampionshipsByCountry(int id)
         {
@@ -52,7 +51,7 @@ namespace WebApplication3.Controllers
             }
         }
 
-        // GET: api/Championships/Confederation?id={id}
+        // GET: api/Championships/Confederation/{id}
         [Route("api/Championships/Confederation/{id}")]
         public IEnumerable<Championship> GetChampionshipsByConfederation(int id)
         {

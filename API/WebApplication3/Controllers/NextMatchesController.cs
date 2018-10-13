@@ -17,7 +17,28 @@ namespace WebApplication3.Controllers
         // GET: api/NextMatches
         public IEnumerable<NextMatch> GetNextMatches()
         {
-            return db.NextMatch.ToList();
+            try
+            {
+                return db.NextMatch.ToList();
+            }
+            catch
+            {
+                return new List<NextMatch>();
+            }
+        }
+
+        // GET: api/NextMatches/Confederation/{id}
+        [Route("api/NextMatches/Championship/{id}")]
+        public IEnumerable<NextMatch> GetNextMatchesByChampionship(int id)
+        {
+            try
+            {
+                return db.NextMatch.Where(n => n.Championship == id && n.FieldControl == "H").OrderBy(n => n.MatchDate).ToList();
+            }
+            catch
+            {
+                return new List<NextMatch>();
+            }
         }
 
         public virtual List<NextMatch> CreateNextMatches(Matches match)
