@@ -29,15 +29,23 @@ namespace WebApplication3.Controllers
 
         // GET: api/NextMatches/Confederation/{id}
         [Route("api/NextMatches/Championship/{id}")]
-        public IEnumerable<NextMatch> GetNextMatchesByChampionship(int id)
+        public IQueryable GetNextMatchesByChampionship(int id)
         {
             try
             {
-                return db.NextMatch.Where(n => n.Championship == id && n.FieldControl == "H").OrderBy(n => n.MatchDate).ToList();
+                var query = from n in db.NextMatch
+                            join t in db.Team
+                            on n.SelectedTeam equals t.ID
+                            join t2 in db.Team
+                            on n.AgainstTeam equals t2.ID
+                            where n.Championship == id && n.FieldControl == "H"
+                            select new { n. Referee, n.SelectedTeam, SelectedTeamName = t.TeamName, n.AgainstTeam, AgainstTeamName = t2.TeamName, n.FieldControl, n.MatchDate };
+
+                return query;
             }
             catch
             {
-                return new List<NextMatch>();
+                return null;
             }
         }
 
