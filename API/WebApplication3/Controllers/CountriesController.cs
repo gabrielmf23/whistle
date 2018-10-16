@@ -13,7 +13,7 @@ namespace WebApplication3.Controllers
         // GET: api/Countries
         public IEnumerable<Country> GetCountries()
         {
-            return db.Country.ToList();
+            return db.Country.ToList().FindAll(c => c.ID != c.Confederation);
         }
 
         // GET: api/Countries/id
@@ -40,8 +40,7 @@ namespace WebApplication3.Controllers
         {
             try
             {
-                var a = db.Country.ToList().FindAll(c => c.Confederation == id && c.ID != c.Confederation);
-                return a;
+                return db.Country.ToList().FindAll(c => c.Confederation == id && c.ID != c.Confederation);
             }
             catch
             {
