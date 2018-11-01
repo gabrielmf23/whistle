@@ -38,8 +38,10 @@ namespace WebApplication3.Controllers
                             on n.SelectedTeam equals t.ID
                             join t2 in db.Team
                             on n.AgainstTeam equals t2.ID
+                            join r in db.Referee
+                            on n.Referee equals r.ID
                             where n.Championship == id && n.FieldControl == "H"
-                            select new { n. Referee, n.SelectedTeam, SelectedTeamName = t.TeamName, n.AgainstTeam, AgainstTeamName = t2.TeamName, n.FieldControl, n.MatchDate };
+                            select new { n.Referee, r.RefereeName, n.SelectedTeam, SelectedTeamName = t.TeamName, n.AgainstTeam, AgainstTeamName = t2.TeamName, n.FieldControl, n.MatchDate, n.Championship };
 
                 return query;
             }
