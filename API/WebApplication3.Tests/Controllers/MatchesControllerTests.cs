@@ -7,8 +7,6 @@ using System.Data.Entity;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using System.Web.Http;
-using System.Web.Http.Results;
 
 namespace WebApplication3.Controllers.Tests
 {

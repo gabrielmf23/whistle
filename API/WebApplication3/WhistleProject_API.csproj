@@ -136,6 +136,7 @@
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\NextMatchesController.cs" />
     <Compile Include="Controllers\RefereesController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
