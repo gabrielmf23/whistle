@@ -11,7 +11,6 @@ namespace WebApplication3.Controllers
 
         public partial class MatchStatistics
         {
-            public int TotalMatches;
             public int VictoriesTeamA;
             public int VictoriesTeamB;
             public int Draws;
@@ -27,21 +26,9 @@ namespace WebApplication3.Controllers
 
                 try
                 {
-                    matchStatistics.TotalMatches = (from m in db.Matches
-                                                    where m.Championship == id && ((m.HomeTeam == home && m.AwayTeam == away) || (m.HomeTeam == away && m.AwayTeam == home))
-                                                    select new { m.Referee }).Count();
-                }
-                catch (Exception e)
-                {
-                    matchStatistics.TotalMatches = 0;
-                    throw e;                    
-                }
-
-                try
-                {
                     matchStatistics.VictoriesTeamA = (from m in db.Matches
                                                       where m.Championship == id &&
-                                                      ((m.HomeTeam == home && m.AwayTeam == away && m.Result == "V") || (m.HomeTeam == away && m.AwayTeam == home && m.Result == "L"))
+                                                      ((m.HomeTeam == home && m.AwayTeam == away && m.Result == "W") || (m.HomeTeam == away && m.AwayTeam == home && m.Result == "L"))
                                                       select new { m.Referee }).Count();
                 }
                 catch
@@ -54,7 +41,7 @@ namespace WebApplication3.Controllers
                 {
                     matchStatistics.VictoriesTeamB = (from m in db.Matches
                                                       where m.Championship == id &&
-                                                      ((m.HomeTeam == home && m.AwayTeam == away && m.Result == "L") || (m.HomeTeam == away && m.AwayTeam == home && m.Result == "V"))
+                                                      ((m.HomeTeam == home && m.AwayTeam == away && m.Result == "L") || (m.HomeTeam == away && m.AwayTeam == home && m.Result == "W"))
                                                       select new { m.Referee }).Count();
                 }
                 catch
