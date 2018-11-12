@@ -29,8 +29,7 @@ namespace WebApplication3.Controllers
         {
             try
             {
-                Matches match = MountMatchObject(jsonbody);
-                match = ValidateMatchObject(match);
+                Matches match = ValidateMatchObject(MountMatchObject(jsonbody));
 
                 //Next match
                 if (!match.Result.Equals("N") && !match.Result.Equals("P"))

@@ -10,7 +10,7 @@ class Log:
         self.nome = "log_" + str(time.strftime('%d_%m_%y_-_%H_%M_%S')) + ".txt"
         if not os.path.exists("./Logs"):
             os.makedirs("./Logs")
-        self.add("Started running!", 0)
+        self.add("Process running!", 0)
 
     def add(self, message, code):
         f = open("Logs/" + self.nome, "a+")
