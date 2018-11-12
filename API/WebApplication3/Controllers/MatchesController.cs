@@ -127,15 +127,47 @@ namespace WebApplication3.Controllers
                 var match = new Matches
                 {
                     Referee = referee.GetRefereeByName(jObject["referee"].ToString()).ID,
-                    HomeTeam = team.GetTeamByName(jObject["ht_name"].ToString(), jObject["ht_complete_name"].ToString()).ID,
-                    AwayTeam = team.GetTeamByName(jObject["aw_name"].ToString(), jObject["aw_complete_name"].ToString()).ID,
                     Result = jObject["match_result"].ToString(),
-                    YC_Home = Convert.ToInt32(jObject["ht_y_card"].ToString()),
-                    RC_Home = Convert.ToInt32(jObject["ht_r_card"].ToString()),
-                    YC_Away = Convert.ToInt32(jObject["aw_y_card"].ToString()),
-                    RC_Away = Convert.ToInt32(jObject["aw_r_card"].ToString()),
                     MatchDate = Convert.ToDateTime(jObject["match_date"].ToString()),
-                    Championship = championship.GetChampionshipById(Convert.ToInt32(jObject["championship"].ToString())).ID
+                    Championship = championship.GetChampionshipById(Convert.ToInt32(jObject["championship"].ToString())).ID,
+
+                    //Home team data
+                    HomeTeam = team.GetTeamByName(jObject["home_team_name"].ToString(), jObject["home_team_complete_name"].ToString()).ID,
+
+                    Home_Goals_Period_1 = Convert.ToInt32(jObject["home_team_goals_1st_period"].ToString()),
+                    Home_Goals_Period_2 = Convert.ToInt32(jObject["home_team_goals_2nd_period"].ToString()),
+                    Home_Goals_Total = Convert.ToInt32(jObject["home_team_goals_total"].ToString()),
+
+                    Home_Yellow_Card1_Period_1 = Convert.ToInt32(jObject["home_team_1st_yellow_card_1st_period"].ToString()),
+                    Home_Yellow_Card1_Period_2 = Convert.ToInt32(jObject["home_team_1st_yellow_card_2nd_period"].ToString()),
+                    Home_Yellow_Card1_Total = Convert.ToInt32(jObject["home_team_1st_yellow_card_total"].ToString()),
+
+                    Home_Yellow_Card2_Period_1 = Convert.ToInt32(jObject["home_team_2nd_yellow_card_1st_period"].ToString()),
+                    Home_Yellow_Card2_Period_2 = Convert.ToInt32(jObject["home_team_2nd_yellow_card_2nd_period"].ToString()),
+                    Home_Yellow_Card2_Total = Convert.ToInt32(jObject["home_team_2nd_yellow_card_total"].ToString()),
+
+                    Home_Red_Card_Period_1 = Convert.ToInt32(jObject["home_team_red_card_1st_period"].ToString()),
+                    Home_Red_Card_Period_2 = Convert.ToInt32(jObject["home_team_red_card_2nd_period"].ToString()),
+                    Home_Red_Card_Total = Convert.ToInt32(jObject["home_team_red_card_total"].ToString()),
+
+                    //Away team data
+                    AwayTeam = team.GetTeamByName(jObject["away_team_name"].ToString(), jObject["away_team_complete_name"].ToString()).ID,
+
+                    Away_Goals_Period_1 = Convert.ToInt32(jObject["away_team_goals_1st_period"].ToString()),
+                    Away_Goals_Period_2 = Convert.ToInt32(jObject["away_team_goals_2nd_period"].ToString()),
+                    Away_Goals_Total = Convert.ToInt32(jObject["away_team_goals_total"].ToString()),
+
+                    Away_Yellow_Card1_Period_1 = Convert.ToInt32(jObject["away_team_1st_yellow_card_1st_period"].ToString()),
+                    Away_Yellow_Card1_Period_2 = Convert.ToInt32(jObject["away_team_1st_yellow_card_2nd_period"].ToString()),
+                    Away_Yellow_Card1_Total = Convert.ToInt32(jObject["away_team_1st_yellow_card_total"].ToString()),
+
+                    Away_Yellow_Card2_Period_1 = Convert.ToInt32(jObject["away_team_2nd_yellow_card_1st_period"].ToString()),
+                    Away_Yellow_Card2_Period_2 = Convert.ToInt32(jObject["away_team_2nd_yellow_card_2nd_period"].ToString()),
+                    Away_Yellow_Card2_Total = Convert.ToInt32(jObject["away_team_2nd_yellow_card_total"].ToString()),
+
+                    Away_Red_Card_Period_1 = Convert.ToInt32(jObject["away_team_red_card_1st_period"].ToString()),
+                    Away_Red_Card_Period_2 = Convert.ToInt32(jObject["away_team_red_card_2nd_period"].ToString()),
+                    Away_Red_Card_Total = Convert.ToInt32(jObject["away_team_red_card_total"].ToString())
                 };
 
                 return match;

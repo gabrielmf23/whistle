@@ -49,10 +49,30 @@
           <Property Name="HomeTeam" Type="int" Nullable="false" />
           <Property Name="AwayTeam" Type="int" Nullable="false" />
           <Property Name="Result" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="YC_Home" Type="int" Nullable="false" />
-          <Property Name="RC_Home" Type="int" Nullable="false" />
-          <Property Name="YC_Away" Type="int" Nullable="false" />
-          <Property Name="RC_Away" Type="int" Nullable="false" />
+          <Property Name="Home_Goals_Period_1" Type="int" Nullable="false" />
+          <Property Name="Home_Goals_Period_2" Type="int" Nullable="false" />
+          <Property Name="Home_Goals_Total" Type="int" Nullable="false" />
+          <Property Name="Away_Goals_Period_1" Type="int" Nullable="false" />
+          <Property Name="Away_Goals_Period_2" Type="int" Nullable="false" />
+          <Property Name="Away_Goals_Total" Type="int" Nullable="false" />
+          <Property Name="Home_Yellow_Card1_Period_1" Type="int" Nullable="false" />
+          <Property Name="Home_Yellow_Card1_Period_2" Type="int" Nullable="false" />
+          <Property Name="Home_Yellow_Card1_Total" Type="int" Nullable="false" />
+          <Property Name="Home_Yellow_Card2_Period_1" Type="int" Nullable="false" />
+          <Property Name="Home_Yellow_Card2_Period_2" Type="int" Nullable="false" />
+          <Property Name="Home_Yellow_Card2_Total" Type="int" Nullable="false" />
+          <Property Name="Home_Red_Card_Period_1" Type="int" Nullable="false" />
+          <Property Name="Home_Red_Card_Period_2" Type="int" Nullable="false" />
+          <Property Name="Home_Red_Card_Total" Type="int" Nullable="false" />
+          <Property Name="Away_Yellow_Card1_Period_1" Type="int" Nullable="false" />
+          <Property Name="Away_Yellow_Card1_Period_2" Type="int" Nullable="false" />
+          <Property Name="Away_Yellow_Card1_Total" Type="int" Nullable="false" />
+          <Property Name="Away_Yellow_Card2_Period_1" Type="int" Nullable="false" />
+          <Property Name="Away_Yellow_Card2_Period_2" Type="int" Nullable="false" />
+          <Property Name="Away_Yellow_Card2_Total" Type="int" Nullable="false" />
+          <Property Name="Away_Red_Card_Period_1" Type="int" Nullable="false" />
+          <Property Name="Away_Red_Card_Period_2" Type="int" Nullable="false" />
+          <Property Name="Away_Red_Card_Total" Type="int" Nullable="false" />
           <Property Name="MatchDate" Type="date" Nullable="false" />
           <Property Name="Championship" Type="int" Nullable="false" />
         </EntityType>
@@ -123,7 +143,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Matches__AwayTea__571DF1D5">
+        <Association Name="FK__Matches__AwayTea__04E4BC85">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
           <ReferentialConstraint>
@@ -135,7 +155,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Matches__Champio__5812160E">
+        <Association Name="FK__Matches__Champio__05D8E0BE">
           <End Role="Championship" Type="Self.Championship" Multiplicity="1" />
           <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
           <ReferentialConstraint>
@@ -147,7 +167,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Matches__HomeTea__5629CD9C">
+        <Association Name="FK__Matches__HomeTea__03F0984C">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
           <ReferentialConstraint>
@@ -159,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Matches__Referee__5535A963">
+        <Association Name="FK__Matches__Referee__02FC7413">
           <End Role="Referee" Type="Self.Referee" Multiplicity="1" />
           <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
           <ReferentialConstraint>
@@ -240,19 +260,19 @@
             <End Role="Championship" EntitySet="Championship" />
             <End Role="Links" EntitySet="Links" />
           </AssociationSet>
-          <AssociationSet Name="FK__Matches__AwayTea__571DF1D5" Association="Self.FK__Matches__AwayTea__571DF1D5">
+          <AssociationSet Name="FK__Matches__AwayTea__04E4BC85" Association="Self.FK__Matches__AwayTea__04E4BC85">
             <End Role="Team" EntitySet="Team" />
             <End Role="Matches" EntitySet="Matches" />
           </AssociationSet>
-          <AssociationSet Name="FK__Matches__Champio__5812160E" Association="Self.FK__Matches__Champio__5812160E">
+          <AssociationSet Name="FK__Matches__Champio__05D8E0BE" Association="Self.FK__Matches__Champio__05D8E0BE">
             <End Role="Championship" EntitySet="Championship" />
             <End Role="Matches" EntitySet="Matches" />
           </AssociationSet>
-          <AssociationSet Name="FK__Matches__HomeTea__5629CD9C" Association="Self.FK__Matches__HomeTea__5629CD9C">
+          <AssociationSet Name="FK__Matches__HomeTea__03F0984C" Association="Self.FK__Matches__HomeTea__03F0984C">
             <End Role="Team" EntitySet="Team" />
             <End Role="Matches" EntitySet="Matches" />
           </AssociationSet>
-          <AssociationSet Name="FK__Matches__Referee__5535A963" Association="Self.FK__Matches__Referee__5535A963">
+          <AssociationSet Name="FK__Matches__Referee__02FC7413" Association="Self.FK__Matches__Referee__02FC7413">
             <End Role="Referee" EntitySet="Referee" />
             <End Role="Matches" EntitySet="Matches" />
           </AssociationSet>
@@ -339,6 +359,30 @@
           <NavigationProperty Name="Team" Relationship="Self.FK__Matches__AwayTea__571DF1D5" FromRole="Matches" ToRole="Team" />
           <NavigationProperty Name="Team1" Relationship="Self.FK__Matches__HomeTea__5629CD9C" FromRole="Matches" ToRole="Team" />
           <NavigationProperty Name="Referee1" Relationship="Self.FK__Matches__Referee__5535A963" FromRole="Matches" ToRole="Referee" />
+          <Property Name="Home_Goals_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Home_Goals_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Home_Goals_Total" Type="Int32" Nullable="false" />
+          <Property Name="Away_Goals_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Away_Goals_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Away_Goals_Total" Type="Int32" Nullable="false" />
+          <Property Name="Home_Yellow_Card1_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Home_Yellow_Card1_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Home_Yellow_Card1_Total" Type="Int32" Nullable="false" />
+          <Property Name="Home_Yellow_Card2_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Home_Yellow_Card2_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Home_Yellow_Card2_Total" Type="Int32" Nullable="false" />
+          <Property Name="Home_Red_Card_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Home_Red_Card_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Home_Red_Card_Total" Type="Int32" Nullable="false" />
+          <Property Name="Away_Yellow_Card1_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Away_Yellow_Card1_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Away_Yellow_Card1_Total" Type="Int32" Nullable="false" />
+          <Property Name="Away_Yellow_Card2_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Away_Yellow_Card2_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Away_Yellow_Card2_Total" Type="Int32" Nullable="false" />
+          <Property Name="Away_Red_Card_Period_1" Type="Int32" Nullable="false" />
+          <Property Name="Away_Red_Card_Period_2" Type="Int32" Nullable="false" />
+          <Property Name="Away_Red_Card_Total" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="NextMatch">
           <Key>
@@ -612,14 +656,34 @@
           <EntitySetMapping Name="Matches">
             <EntityTypeMapping TypeName="dbapitoModel.Matches">
               <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="Away_Red_Card_Total" ColumnName="Away_Red_Card_Total" />
+                <ScalarProperty Name="Away_Red_Card_Period_2" ColumnName="Away_Red_Card_Period_2" />
+                <ScalarProperty Name="Away_Red_Card_Period_1" ColumnName="Away_Red_Card_Period_1" />
+                <ScalarProperty Name="Away_Yellow_Card2_Total" ColumnName="Away_Yellow_Card2_Total" />
+                <ScalarProperty Name="Away_Yellow_Card2_Period_2" ColumnName="Away_Yellow_Card2_Period_2" />
+                <ScalarProperty Name="Away_Yellow_Card2_Period_1" ColumnName="Away_Yellow_Card2_Period_1" />
+                <ScalarProperty Name="Away_Yellow_Card1_Total" ColumnName="Away_Yellow_Card1_Total" />
+                <ScalarProperty Name="Away_Yellow_Card1_Period_2" ColumnName="Away_Yellow_Card1_Period_2" />
+                <ScalarProperty Name="Away_Yellow_Card1_Period_1" ColumnName="Away_Yellow_Card1_Period_1" />
+                <ScalarProperty Name="Home_Red_Card_Total" ColumnName="Home_Red_Card_Total" />
+                <ScalarProperty Name="Home_Red_Card_Period_2" ColumnName="Home_Red_Card_Period_2" />
+                <ScalarProperty Name="Home_Red_Card_Period_1" ColumnName="Home_Red_Card_Period_1" />
+                <ScalarProperty Name="Home_Yellow_Card2_Total" ColumnName="Home_Yellow_Card2_Total" />
+                <ScalarProperty Name="Home_Yellow_Card2_Period_2" ColumnName="Home_Yellow_Card2_Period_2" />
+                <ScalarProperty Name="Home_Yellow_Card2_Period_1" ColumnName="Home_Yellow_Card2_Period_1" />
+                <ScalarProperty Name="Home_Yellow_Card1_Total" ColumnName="Home_Yellow_Card1_Total" />
+                <ScalarProperty Name="Home_Yellow_Card1_Period_2" ColumnName="Home_Yellow_Card1_Period_2" />
+                <ScalarProperty Name="Home_Yellow_Card1_Period_1" ColumnName="Home_Yellow_Card1_Period_1" />
+                <ScalarProperty Name="Away_Goals_Total" ColumnName="Away_Goals_Total" />
+                <ScalarProperty Name="Away_Goals_Period_2" ColumnName="Away_Goals_Period_2" />
+                <ScalarProperty Name="Away_Goals_Period_1" ColumnName="Away_Goals_Period_1" />
+                <ScalarProperty Name="Home_Goals_Total" ColumnName="Home_Goals_Total" />
+                <ScalarProperty Name="Home_Goals_Period_2" ColumnName="Home_Goals_Period_2" />
+                <ScalarProperty Name="Home_Goals_Period_1" ColumnName="Home_Goals_Period_1" />
                 <ScalarProperty Name="Referee" ColumnName="Referee" />
                 <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
                 <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
-                <ScalarProperty Name="YC_Home" ColumnName="YC_Home" />
-                <ScalarProperty Name="RC_Home" ColumnName="RC_Home" />
-                <ScalarProperty Name="YC_Away" ColumnName="YC_Away" />
-                <ScalarProperty Name="RC_Away" ColumnName="RC_Away" />
                 <ScalarProperty Name="MatchDate" ColumnName="MatchDate" />
                 <ScalarProperty Name="Championship" ColumnName="Championship" />
               </MappingFragment>

@@ -24,6 +24,30 @@ namespace WebApplication3.Models
         public int RC_Away { get; set; }
         public System.DateTime MatchDate { get; set; }
         public int Championship { get; set; }
+        public int Home_Goals_Period_1 { get; set; }
+        public int Home_Goals_Period_2 { get; set; }
+        public int Home_Goals_Total { get; set; }
+        public int Away_Goals_Period_1 { get; set; }
+        public int Away_Goals_Period_2 { get; set; }
+        public int Away_Goals_Total { get; set; }
+        public int Home_Yellow_Card1_Period_1 { get; set; }
+        public int Home_Yellow_Card1_Period_2 { get; set; }
+        public int Home_Yellow_Card1_Total { get; set; }
+        public int Home_Yellow_Card2_Period_1 { get; set; }
+        public int Home_Yellow_Card2_Period_2 { get; set; }
+        public int Home_Yellow_Card2_Total { get; set; }
+        public int Home_Red_Card_Period_1 { get; set; }
+        public int Home_Red_Card_Period_2 { get; set; }
+        public int Home_Red_Card_Total { get; set; }
+        public int Away_Yellow_Card1_Period_1 { get; set; }
+        public int Away_Yellow_Card1_Period_2 { get; set; }
+        public int Away_Yellow_Card1_Total { get; set; }
+        public int Away_Yellow_Card2_Period_1 { get; set; }
+        public int Away_Yellow_Card2_Period_2 { get; set; }
+        public int Away_Yellow_Card2_Total { get; set; }
+        public int Away_Red_Card_Period_1 { get; set; }
+        public int Away_Red_Card_Period_2 { get; set; }
+        public int Away_Red_Card_Total { get; set; }
     
         public virtual Championship Championship1 { get; set; }
         public virtual Team Team { get; set; }

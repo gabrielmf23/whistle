@@ -18,10 +18,8 @@ namespace WebApplication3.Models
         public dbapitoEntities()
             : base("name=dbapitoEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
